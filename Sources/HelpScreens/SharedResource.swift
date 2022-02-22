@@ -13,8 +13,8 @@
 
 import Foundation
 
-struct HTMLResourceIdentifier: RawRepresentable, Hashable, Equatable {
-    struct HTMLResource: Hashable {
+public struct HTMLResourceIdentifier: RawRepresentable, Hashable, Equatable {
+    public struct HTMLResource: Hashable {
         /// Name of the HTMl Resource excluding extension
         let name: String
         
@@ -22,15 +22,15 @@ struct HTMLResourceIdentifier: RawRepresentable, Hashable, Equatable {
         let subPath: String?
     }
     
-    typealias RawValue = HTMLResource
-    let rawValue: RawValue
+    public typealias RawValue = HTMLResource
+    public let rawValue: RawValue
     
-    init(rawValue: RawValue) {
+    public init(rawValue: RawValue) {
         self.rawValue = rawValue
     }
 }
 
-extension HTMLResourceIdentifier {
+public extension HTMLResourceIdentifier {
     var url: URL? {
         guard let language = Locale.current.languageCode else { return nil }
         return url(for: language)
