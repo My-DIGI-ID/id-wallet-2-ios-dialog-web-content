@@ -48,6 +48,6 @@ extension HTMLResourceIdentifier {
 }
 
 extension HTMLResourceIdentifier {
-    static let learnMore = HTMLResourceIdentifier(name: "learnMore")
+    static public let learnMore = HTMLResourceIdentifier(name: "learnMore")
 }
 
