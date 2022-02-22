@@ -13,8 +13,37 @@
 
 import Foundation
 
-public enum SharedResource {
-    static public let learnMoreEn = Bundle.module.url(forResource: "html/en/learn-more", withExtension: "html")
-    static public let learnMoreDe = Bundle.module.url(forResource: "html/de/learn-more", withExtension: "html")
-
+struct HTMLResourceIdentifier: RawRepresentable, Hashable, Equatable {
+    struct HTMLResource: Hashable {
+        /// Name of the HTMl Resource excluding extension
+        let name: String
+        
+        /// Optional sub-directory path where the resource could be located
+        let subPath: String?
+    }
+    
+    typealias RawValue = HTMLResource
+    let rawValue: RawValue
+    
+    init(rawValue: RawValue) {
+        self.rawValue = rawValue
+    }
 }
+
+extension HTMLResourceIdentifier {
+    var url: URL? {
+        guard let language = Locale.current.languageCode else { return nil }
+        return url(for: language)
+    }
+    
+    func url(for locale: String) -> URL? {
+        let localizedSubPath = rawValue.subPath.map { "\(locale)/\($0)"} ?? locale
+        return Bundle.module.url(forResource: rawValue.name, withExtension: "html", subdirectory: "html/\(localizedSubPath)")
+    }
+    
+    /// Convenience initializer that omits th rawValue identifier
+    init(name: String, subPath: String? = nil) {
+        self.init(rawValue: .init(name: name, subPath: subPath))
+    }
+}
+
