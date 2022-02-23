@@ -15,7 +15,7 @@ let package = Package(
         .target(
             name: "HelpScreens",
             resources: [
-                .copy("Resources/html")
+                .copy("Resources")
             ])
     ]
 )
