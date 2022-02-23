@@ -13,5 +13,6 @@
 
 /// List all html files we can reference
 public extension HTMLResourceIdentifier {
-    static public let learnMore = HTMLResourceIdentifier(name: "learn-more")
+    static let learnMore = HTMLResourceIdentifier(name: "learn-more")
+    static let helpLevelX = HTMLResourceIdentifier(name: "help-level-x")
 }
